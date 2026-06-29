@@ -1,0 +1,18 @@
+{
+  "id": "orv",
+  "name": "Omniscient Reader's Viewpoint",
+  "version": "1.0.0",
+  "author": "Omniscient RP",
+  "language": "en",
+  "description": "Official ORV Canon Pack",
+  "modules": [
+    "characters",
+    "scenarios",
+    "constellations",
+    "places",
+    "organizations",
+    "items",
+    "rules",
+    "timeline"
+  ]
+}
