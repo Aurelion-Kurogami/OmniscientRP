@@ -1,5 +1,13 @@
 # Omniscient RP
 
-An AI roleplay app with omniscient memory.
+The ultimate AI Roleplaying app.
 
-Project started: 2026
+## Features
+
+- Long-term Memory
+- Character Cards
+- Lorebooks
+- World Simulation
+- Story Director
+- Multiple AI Providers
+- Cinematic Scenes
