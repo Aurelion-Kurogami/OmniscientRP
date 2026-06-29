@@ -1,1 +1,10 @@
-
+{
+    "theme": "dark",
+    "language": "en",
+    "provider": "auto",
+    "storyMode": true,
+    "cinematicMode": true,
+    "canonLock": true,
+    "autoSearch": true,
+    "autoMemory": true
+}
