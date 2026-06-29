@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "id": "kim_dokja",
+    "name": "Kim Dokja",
+    "aliases": [
+      "Demon King of Salvation",
+      "Ugly King"
+    ],
+    "species": "Human",
+    "gender": "Male",
+
+    "appearance": {
+      "hair": "Black",
+      "eyes": "Unspecified",
+      "height_cm": null
+    },
+
+    "personality": {
+      "summary": "",
+      "speech_style": "",
+      "traits": []
+    },
+
+    "relationships": [],
+
+    "abilities": [],
+
+    "stories": [],
+
+    "constellation": null,
+
+    "affiliations": [],
+
+    "first_appearance": {
+      "novel_chapter": 1,
+      "manhwa_chapter": 1
+    },
+
+    "status": "Alive",
+
+    "canon_notes": [],
+
+    "sources": []
+  }
+]
