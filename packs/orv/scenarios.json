@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Proof of Value",
+    "type": "Main Scenario",
+    "order": 1,
+
+    "description": "",
+
+    "location": "",
+
+    "participants": [],
+
+    "requirements": [],
+
+    "failure_conditions": [],
+
+    "success_conditions": [],
+
+    "rewards": [],
+
+    "penalties": [],
+
+    "next_scenario": 2,
+
+    "related_characters": [],
+
+    "related_constellations": [],
+
+    "related_items": [],
+
+    "canon_notes": [],
+
+    "sources": []
+  }
+]
