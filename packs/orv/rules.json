@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "main_scenarios_are_sequential",
+    "rule": "Main Scenarios must occur in numerical order.",
+    "severity": "critical"
+  },
+  {
+    "id": "probability_exists",
+    "rule": "Probability governs supernatural actions.",
+    "severity": "critical"
+  },
+  {
+    "id": "constellations_are_watchers",
+    "rule": "Constellations observe incarnations and may intervene according to canon.",
+    "severity": "high"
+  },
+  {
+    "id": "character_personality",
+    "rule": "Canon personalities must not change unless the RP explicitly changes them.",
+    "severity": "critical"
+  }
+]
