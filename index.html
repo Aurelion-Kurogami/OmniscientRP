@@ -1,67 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Omniscient RP</title>
 
-<style>
-body{
-    margin:0;
-    background:#0f1117;
-    color:white;
-    font-family:Arial,sans-serif;
-}
-
-header{
-    background:#181c25;
-    padding:20px;
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.menu{
-    padding:20px;
-}
-
-button{
-    width:100%;
-    padding:18px;
-    margin-top:15px;
-    border:none;
-    border-radius:12px;
-    background:#2d7cff;
-    color:white;
-    font-size:18px;
-}
-
-button:hover{
-    opacity:.9;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
 <header>
+
 Omniscient RP
+
 </header>
 
-<div class="menu">
+<div class="character-card">
 
-<button>📖 New Story</button>
+<h2>Daiwa Scarlet</h2>
 
-<button>📚 Continue Story</button>
+<div class="info">❤️ Relationship: Stranger</div>
 
-<button>👤 Character Library</button>
+<div class="info">😊 Mood: Competitive</div>
 
-<button>🧠 Memory Archive</button>
-
-<button>⚙ Settings</button>
+<div class="info">📍 Location: Training Track</div>
 
 </div>
 
+<div class="chat-box">
+
+<b>Daiwa Scarlet</b>
+
+<p>
+
+"...You're finally here.
+
+Don't tell me you got lost."
+
+</p>
+
+</div>
+
+<div class="bottom-bar">
+
+<button onclick="feature('Chat')">💬</button>
+
+<button onclick="feature('Memory')">🧠</button>
+
+<button onclick="feature('Lore')">📚</button>
+
+<button onclick="feature('Scene')">🎬</button>
+
+<button onclick="feature('Settings')">⚙️</button>
+
+</div>
+
+<script src="app.js"></script>
+
 </body>
+
 </html>
