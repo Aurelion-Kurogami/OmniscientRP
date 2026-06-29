@@ -1,0 +1,9 @@
+{
+  "time": "Day",
+  "weather": "",
+  "current_location": "",
+  "active_scenario": 1,
+  "completed_scenarios": [],
+  "failed_scenarios": [],
+  "world_events": []
+}
