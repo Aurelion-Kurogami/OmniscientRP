@@ -1,19 +1,12 @@
-class SearchEngine {
+export function search(pack, keyword) {
+  if (!pack || !pack.searchIndex) return [];
 
-    search(keyword) {
+  keyword = keyword.toLowerCase();
 
-        keyword = keyword.toLowerCase();
-
-        const index = DB.get("search_index");
-
-        return index.filter(entry =>
-            entry.keywords.some(k =>
-                k.toLowerCase().includes(keyword)
-            )
-        );
-
-    }
-
+  return pack.searchIndex.filter(entry =>
+    entry.name.toLowerCase().includes(keyword) ||
+    (entry.aliases || []).some(alias =>
+      alias.toLowerCase().includes(keyword)
+    )
+  );
 }
-
-const SEARCH = new SearchEngine();
