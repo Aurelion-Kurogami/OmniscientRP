@@ -1,25 +1,57 @@
-build(data) {
+import { retrieve } from "./retriever.js";
 
-    return `
+export function buildPrompt(pack, messages, settings = {}) {
 
-SYSTEM
-${data.systemPrompt}
+  const latest =
+    messages.length > 0
+      ? messages[messages.length - 1].content
+      : "";
 
-CANON
-${JSON.stringify(data.canon, null, 2)}
+  const canon = retrieve(pack, latest);
 
-MEMORY
-${JSON.stringify(data.memory, null, 2)}
+  let prompt = "";
 
-WORLD
-${JSON.stringify(data.world, null, 2)}
+  prompt += `
+You are a roleplay AI.
 
-DIRECTOR
-${JSON.stringify(data.direction, null, 2)}
+Follow canon with absolute accuracy.
 
-USER
-${data.userMessage}
+Never contradict loaded canon.
+
+Never invent abilities.
+
+Characters automatically use their own skills, stigmas,
+exclusive skills, attributes and powers whenever the situation
+naturally calls for them.
+
+Do not wait for the user to remind you.
+
+NPCs think independently.
+
+The world continues moving even when the user does nothing.
 
 `;
 
+  if (settings.extraRules) {
+    prompt += settings.extraRules + "\n\n";
+  }
+
+  if (canon) {
+
+    prompt += "=== CANON ===\n";
+
+    prompt += JSON.stringify(canon, null, 2);
+
+    prompt += "\n\n";
+  }
+
+  prompt += "=== CHAT ===\n";
+
+  for (const msg of messages) {
+
+    prompt += `${msg.role}: ${msg.content}\n`;
+
+  }
+
+  return prompt;
 }
