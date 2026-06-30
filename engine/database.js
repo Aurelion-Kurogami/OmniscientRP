@@ -1,21 +1,35 @@
-class Database {
+export class Database {
 
-    constructor() {
-        this.data = {};
+    constructor(pack) {
+
+        this.pack = pack;
+
     }
 
-    register(name, data) {
-        this.data[name] = data;
+    get(type) {
+
+        return this.pack[type] || [];
+
     }
 
-    get(name) {
-        return this.data[name] || [];
+    find(type, id) {
+
+        return this.get(type).find(
+            entry => entry.id === id
+        ) || null;
+
     }
 
-    clear() {
-        this.data = {};
+    filter(type, callback) {
+
+        return this.get(type).filter(callback);
+
+    }
+
+    exists(type, id) {
+
+        return this.find(type, id) !== null;
+
     }
 
 }
-
-const DB = new Database();
