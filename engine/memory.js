@@ -1,34 +1,53 @@
 export class Memory {
 
-    constructor(limit = 30) {
+    constructor(limit = 100) {
+
         this.limit = limit;
-        this.messages = [];
+
+        this.entries = [];
+
     }
 
-    add(role, content) {
+    add(type, content) {
 
-        this.messages.push({
-            role,
+        this.entries.push({
+
+            type,
+
             content,
+
             timestamp: Date.now()
+
         });
 
-        if (this.messages.length > this.limit) {
-            this.messages.shift();
+        if (this.entries.length > this.limit) {
+
+            this.entries.shift();
+
         }
 
     }
 
-    history() {
-        return [...this.messages];
+    latest(count = 10) {
+
+        return this.entries.slice(-count);
+
+    }
+
+    filter(type) {
+
+        return this.entries.filter(
+
+            entry => entry.type === type
+
+        );
+
     }
 
     clear() {
-        this.messages = [];
-    }
 
-    latest() {
-        return this.messages.at(-1) || null;
+        this.entries = [];
+
     }
 
 }
