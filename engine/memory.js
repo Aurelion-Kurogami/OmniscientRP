@@ -1,6 +1,7 @@
-class MemoryEngine {
+export class Memory {
 
-    constructor() {
+    constructor(limit = 30) {
+        this.limit = limit;
         this.messages = [];
     }
 
@@ -8,19 +9,26 @@ class MemoryEngine {
 
         this.messages.push({
             role,
-            content
+            content,
+            timestamp: Date.now()
         });
+
+        if (this.messages.length > this.limit) {
+            this.messages.shift();
+        }
 
     }
 
-    get() {
-        return this.messages;
+    history() {
+        return [...this.messages];
     }
 
     clear() {
         this.messages = [];
     }
 
-}
+    latest() {
+        return this.messages.at(-1) || null;
+    }
 
-const MEMORY = new MemoryEngine();
+}
