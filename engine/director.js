@@ -4,29 +4,23 @@ class DirectorEngine {
         this.scene = {};
     }
 
-    prepare(userMessage) {
+    update(context) {
 
-        return {
+        const result = {
 
-            canon: CANON.get(userMessage),
+            characters: [],
 
-            memory: MEMORY.get(),
+            events: [],
 
-            world: WORLD,
+            weather: null,
 
-            behavior: BEHAVIOR.decide({
-                world: WORLD,
-                memory: MEMORY.get(),
-                message: userMessage
-            })
+            scenario: null,
+
+            recommendations: []
 
         };
 
-    }
-
-    async run(userMessage) {
-
-        return this.prepare(userMessage);
+        return result;
 
     }
 
