@@ -1,18 +1,50 @@
 {
   "id": "orv",
   "name": "Omniscient Reader's Viewpoint",
+
   "version": "1.0.0",
-  "author": "Omniscient RP",
-  "language": "en",
-  "description": "Official ORV Canon Pack",
-  "modules": [
+
+  "files": [
+
     "characters",
-    "scenarios",
+
+    "stories",
+
+    "exclusive_skills",
+
+    "attributes",
+
+    "stigmas",
+
     "constellations",
-    "places",
+
     "organizations",
-    "items",
+
+    "places",
+
     "rules",
-    "timeline"
+
+    "timeline",
+
+    "scenarios",
+
+    "items",
+
+    "dokkaebis",
+
+    "nebulae",
+
+    "outer_gods",
+
+    "incarnations",
+
+    "monsters",
+
+    "coins",
+
+    "probability",
+
+    "behavior_rules"
+
   ]
 }
