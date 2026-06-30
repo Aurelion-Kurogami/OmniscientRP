@@ -1,15 +1,39 @@
 class Router {
 
-    constructor() {
-        this.provider = "auto";
-    }
+    async process(userMessage) {
 
-    setProvider(provider) {
-        this.provider = provider;
-    }
+        // 1. Search canon
+        const canon = CANON.get(userMessage);
 
-    getProvider() {
-        return this.provider;
+        // 2. Read memory
+        const memory = MEMORY.get();
+
+        // 3. Read world state
+        const world = WORLD;
+
+        // 4. Build prompt
+        const prompt = PROMPT.build({
+            systemPrompt: "",
+            canon,
+            memory,
+            world,
+            userMessage
+        });
+
+        // 5. Ask AI
+        const reply = await AI.reply({
+            systemPrompt: "",
+            canon,
+            memory,
+            world,
+            userMessage
+        });
+
+        // 6. Judge response
+        JUDGE.clear();
+
+        return reply;
+
     }
 
 }
