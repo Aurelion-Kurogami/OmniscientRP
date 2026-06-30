@@ -1,10 +1,32 @@
 class AIEngine {
 
-    async reply(data) {
+    constructor() {
 
-        const prompt = PROMPT.build(data);
+        this.provider = "claude";
 
-        return prompt;
+    }
+
+    setProvider(provider) {
+
+        this.provider = provider;
+
+    }
+
+    async reply(context) {
+
+        const prompt = PROMPT.build({
+
+            systemPrompt: "",
+
+            ...context
+
+        });
+
+        console.log(prompt);
+
+        // Claude / GPT / Gemini request goes here
+
+        return "";
 
     }
 
