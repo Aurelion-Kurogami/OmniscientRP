@@ -1,22 +1,14 @@
 class Retriever {
 
-    findCharacter(id) {
+    retrieve(result) {
 
-        const characters = DB.get("characters");
-
-        return characters.find(character => character.id === id) || null;
-
-    }
-
-    retrieve(searchResult) {
-
-        if (!searchResult)
+        if (!result)
             return null;
 
-        switch (searchResult.type) {
+        switch (result.type) {
 
             case "character":
-                return this.findCharacter(searchResult.id);
+                return CHARACTER.get(result.id);
 
             default:
                 return null;
