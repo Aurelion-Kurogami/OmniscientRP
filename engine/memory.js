@@ -1,32 +1,24 @@
 class MemoryEngine {
 
     constructor() {
-        this.memories = [];
+        this.messages = [];
     }
 
-    add(memory) {
-        memory.time = Date.now();
-        this.memories.push(memory);
-    }
+    add(role, content) {
 
-    all() {
-        return this.memories;
-    }
-
-    search(keyword) {
-
-        return this.memories.filter(memory => {
-
-            return JSON.stringify(memory)
-                .toLowerCase()
-                .includes(keyword.toLowerCase());
-
+        this.messages.push({
+            role,
+            content
         });
 
     }
 
+    get() {
+        return this.messages;
+    }
+
     clear() {
-        this.memories = [];
+        this.messages = [];
     }
 
 }
