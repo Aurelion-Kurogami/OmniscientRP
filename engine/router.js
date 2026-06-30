@@ -1,29 +1,21 @@
-class Router {
+export class Router {
 
-    async process(userMessage) {
+    constructor(engine) {
+        this.engine = engine;
+    }
 
-        const context = CONTEXT.build(userMessage);
+    async send(userMessage) {
 
-        const prompt = PROMPT.build({
+        this.engine.memory.add("user", userMessage);
 
-            systemPrompt: "",
+        const reply = await this.engine.reply(
+            this.engine.memory.history()
+        );
 
-            ...context
-
-        });
-
-        const reply = await AI.reply({
-
-            systemPrompt: "",
-
-            ...context
-
-        });
+        this.engine.memory.add("assistant", reply);
 
         return reply;
 
     }
 
 }
-
-const ROUTER = new Router();
