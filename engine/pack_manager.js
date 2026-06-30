@@ -1,43 +1,53 @@
-export async function loadPack(name) {
-  const base = `packs/${name}`;
+export class PackManager {
 
-  async function read(file) {
-    const res = await fetch(`${base}/${file}`);
+    constructor(loader) {
 
-    if (!res.ok) {
-      console.warn(`${file} not found.`);
-      return [];
+        this.loader = loader;
+
     }
 
-    return await res.json();
-  }
+    async load(name) {
 
-  return {
-    manifest: await read("manifest.json"),
-    searchIndex: await read("search_index.json"),
+        const files = [
 
-    characters: await read("characters.json"),
-    stories: await read("stories.json"),
+            "attributes",
+            "characters",
+            "coins",
+            "constellations",
+            "dokkaebis",
+            "exclusive_skills",
+            "incarnations",
+            "items",
+            "manifest",
+            "monsters",
+            "nebulae",
+            "organizations",
+            "outer_gods",
+            "places",
+            "probability",
+            "rules",
+            "scenarios",
+            "search_index",
+            "stigmas",
+            "stories",
+            "timeline"
 
-    items: await read("items.json"),
-    organizations: await read("organizations.json"),
-    places: await read("places.json"),
+        ];
 
-    constellations: await read("constellations.json"),
-    exclusiveSkills: await read("exclusive_skills.json"),
-    stigmas: await read("stigmas.json"),
-    attributes: await read("attributes.json"),
+        const pack = {};
 
-    scenarios: await read("scenarios.json"),
-    timeline: await read("timeline.json"),
-    rules: await read("rules.json"),
+        for (const file of files) {
 
-    monsters: await read("monsters.json"),
-    dokkaebis: await read("dokkaebis.json"),
-    nebulae: await read("nebulae.json"),
-    incarnations: await read("incarnations.json"),
-    outerGods: await read("outer_gods.json"),
-    probability: await read("probability.json"),
-    coins: await read("coins.json")
-  };
-      }
+            const response = await fetch(
+                `packs/${name}/${file}.json`
+            );
+
+            pack[file] = await response.json();
+
+        }
+
+        return pack;
+
+    }
+
+}
