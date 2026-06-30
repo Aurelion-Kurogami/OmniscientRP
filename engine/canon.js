@@ -1,7 +1,14 @@
 class CanonEngine {
 
     find(name) {
-        return SEARCH.search(name);
+
+        const result = SEARCH.search(name);
+
+        if (result.length === 0)
+            return null;
+
+        return result[0];
+
     }
 
 }
