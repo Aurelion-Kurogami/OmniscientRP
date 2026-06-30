@@ -2,35 +2,56 @@ class Router {
 
     async process(userMessage) {
 
-        // 1. Search canon
+        // Canon
         const canon = CANON.get(userMessage);
 
-        // 2. Read memory
+        // Memory
         const memory = MEMORY.get();
 
-        // 3. Read world state
+        // World
         const world = WORLD;
 
-        // 4. Build prompt
+        // Director decides world events
+        const direction = DIRECTOR.update({
+            canon,
+            memory,
+            world,
+            userMessage
+        });
+
+        // Build prompt
         const prompt = PROMPT.build({
+
             systemPrompt: "",
+
             canon,
+
             memory,
+
             world,
+
+            direction,
+
             userMessage
+
         });
 
-        // 5. Ask AI
+        // AI response
         const reply = await AI.reply({
-            systemPrompt: "",
-            canon,
-            memory,
-            world,
-            userMessage
-        });
 
-        // 6. Judge response
-        JUDGE.clear();
+            systemPrompt: "",
+
+            canon,
+
+            memory,
+
+            world,
+
+            direction,
+
+            userMessage
+
+        });
 
         return reply;
 
