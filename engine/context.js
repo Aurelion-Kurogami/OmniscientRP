@@ -1,31 +1,26 @@
-class ContextEngine {
+export class Context {
 
-    build(userMessage) {
-
-        return {
-
-            userMessage,
-
-            memory: MEMORY.get(),
-
-            world: WORLD,
-
-            canon: CANON.get(userMessage),
-
-            director: DIRECTOR.update({
-
-                userMessage,
-
-                world: WORLD,
-
-                memory: MEMORY.get()
-
-            })
-
+    constructor() {
+        this.state = {
+            pack: null,
+            timeline: null,
+            location: null,
+            scenario: null,
+            participants: [],
+            world: {}
         };
+    }
 
+    set(key, value) {
+        this.state[key] = value;
+    }
+
+    get(key) {
+        return this.state[key];
+    }
+
+    export() {
+        return structuredClone(this.state);
     }
 
 }
-
-const CONTEXT = new ContextEngine();
