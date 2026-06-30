@@ -1,22 +1,24 @@
-class Retriever {
+import { search } from "./search.js";
 
-    retrieve(result) {
+export function retrieve(pack, keyword) {
+  const matches = search(pack, keyword);
 
-        if (!result)
-            return null;
+  if (!matches.length) return null;
 
-        switch (result.type) {
+  const result = {};
 
-            case "character":
-                return CHARACTER.get(result.id);
+  for (const match of matches) {
+    const list = pack[match.file];
 
-            default:
-                return null;
+    if (!Array.isArray(list)) continue;
 
-        }
+    const found = list.find(x => x.id === match.id);
 
+    if (found) {
+      result[match.file] ??= [];
+      result[match.file].push(found);
     }
+  }
 
+  return result;
 }
-
-const RETRIEVER = new Retriever();
