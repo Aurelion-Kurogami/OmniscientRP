@@ -1,45 +1,16 @@
-class Loader {
+import { loadPack } from "./pack_manager.js";
 
-    async loadPack(pack) {
+export class Loader {
+  constructor() {
+    this.currentPack = null;
+  }
 
-        const base = `packs/${pack}`;
+  async initialize(packName) {
+    this.currentPack = await loadPack(packName);
+    return this.currentPack;
+  }
 
-        const files = [
-            "characters",
-            "constellations",
-            "exclusive_skills",
-            "stories",
-            "stigmas",
-            "attributes",
-            "items",
-            "organizations",
-            "places",
-            "rules",
-            "scenarios",
-            "timeline",
-            "search_index",
-            "dokkaebis",
-            "nebulae",
-            "incarnations",
-            "monsters",
-            "outer_gods",
-            "coins",
-            "probability"
-        ];
-
-        DB.clear();
-
-        for (const file of files) {
-
-            const response = await fetch(`${base}/${file}.json`);
-            const data = await response.json();
-
-            DB.register(file, data);
-
-        }
-
-    }
-
+  getPack() {
+    return this.currentPack;
+  }
 }
-
-const LOADER = new Loader();
