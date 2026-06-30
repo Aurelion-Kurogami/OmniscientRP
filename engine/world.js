@@ -1,20 +1,61 @@
 class WorldEngine {
 
     constructor() {
-        this.currentPack = "";
-        this.currentScenario = 1;
+
+        this.state = {
+
+            location: null,
+
+            scenario: null,
+
+            weather: null,
+
+            time: null,
+
+            participants: [],
+
+            activeEvents: []
+
+        };
+
     }
 
-    loadPack(pack) {
-        this.currentPack = pack;
+    get() {
+
+        return this.state;
+
     }
 
-    setScenario(id) {
-        this.currentScenario = id;
+    update(data) {
+
+        this.state = {
+
+            ...this.state,
+
+            ...data
+
+        };
+
     }
 
-    getScenario() {
-        return this.currentScenario;
+    reset() {
+
+        this.state = {
+
+            location: null,
+
+            scenario: null,
+
+            weather: null,
+
+            time: null,
+
+            participants: [],
+
+            activeEvents: []
+
+        };
+
     }
 
 }
