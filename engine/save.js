@@ -1,26 +1,13 @@
-class SaveEngine {
+export function buildSave(memory, context) {
 
-    constructor() {
-        this.player = {};
-        this.world = {};
-        this.characters = [];
-        this.history = [];
-    }
+    return {
 
-    load(save) {
-        this.player = save.player;
-        this.world = save.world;
-        this.characters = save.characters;
-        this.history = save.history;
-    }
+        created: Date.now(),
 
-    reset() {
-        this.player = {};
-        this.world = {};
-        this.characters = [];
-        this.history = [];
-    }
+        context: context.export(),
+
+        messages: memory.history()
+
+    };
 
 }
-
-const SAVE = new SaveEngine();
