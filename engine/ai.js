@@ -1,30 +1,54 @@
 import { Loader } from "./loader.js";
+import { Memory } from "./memory.js";
+import { Context } from "./context.js";
 import { buildPrompt } from "./prompt.js";
+import { judge } from "./judge.js";
+import { buildSave } from "./save.js";
 
 export class AIEngine {
 
-  constructor(provider) {
-    this.provider = provider;
-    this.loader = new Loader();
-    this.pack = null;
-  }
+    constructor(provider) {
 
-  async initialize(packName) {
-    this.pack = await this.loader.initialize(packName);
-  }
+        this.provider = provider;
 
-  async reply(messages, settings = {}) {
+        this.loader = new Loader();
 
-    if (!this.pack)
-      throw new Error("Pack not loaded.");
+        this.memory = new Memory();
 
-    const prompt = buildPrompt(
-      this.pack,
-      messages,
-      settings
-    );
+        this.context = new Context();
 
-    return await this.provider.generate(prompt);
-  }
+        this.pack = null;
+
+    }
+
+    async initialize(packName) {
+
+        this.pack = await this.loader.initialize(packName);
+
+        this.context.set("pack", packName);
+
+    }
+
+    async reply(messages) {
+
+        const prompt = buildPrompt(
+            this.pack,
+            messages
+        );
+
+        const raw = await this.provider.generate(prompt);
+
+        const checked = judge(raw);
+
+        const save = buildSave(
+            this.memory,
+            this.context
+        );
+
+        console.log(save);
+
+        return checked.reply;
+
+    }
 
 }
