@@ -1,44 +1,44 @@
-import { World } from "./world.js";
-
 export class Context {
 
     constructor() {
 
-        this.world = new World();
-
-        this.state = {
-
-            pack: null,
-
-            timeline: null,
-
-            participants: []
-
-        };
+        this.data = {};
 
     }
 
     set(key, value) {
 
-        this.state[key] = value;
+        this.data[key] = value;
 
     }
 
     get(key) {
 
-        return this.state[key];
+        return this.data[key];
+
+    }
+
+    has(key) {
+
+        return key in this.data;
+
+    }
+
+    remove(key) {
+
+        delete this.data[key];
+
+    }
+
+    clear() {
+
+        this.data = {};
 
     }
 
     export() {
 
-        return {
-
-            ...structuredClone(this.state),
-
-            world: this.world.get()
-
-        };
+        return structuredClone(this.data);
 
     }
 
