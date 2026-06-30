@@ -1,63 +1,46 @@
-class WorldEngine {
+export class World {
 
     constructor() {
 
         this.state = {
 
-            location: null,
+            turn: 0,
 
             scenario: null,
 
-            weather: null,
+            location: null,
 
-            time: null,
+            weather: null,
 
             participants: [],
 
             activeEvents: []
 
         };
-
-    }
-
-    get() {
-
-        return this.state;
 
     }
 
     update(data) {
 
-        this.state = {
-
-            ...this.state,
-
-            ...data
-
-        };
+        Object.assign(
+            this.state,
+            data
+        );
 
     }
 
-    reset() {
+    nextTurn() {
 
-        this.state = {
+        this.state.turn++;
 
-            location: null,
+    }
 
-            scenario: null,
+    get() {
 
-            weather: null,
-
-            time: null,
-
-            participants: [],
-
-            activeEvents: []
-
-        };
+        return structuredClone(
+            this.state
+        );
 
     }
 
 }
-
-const WORLD = new WorldEngine();
