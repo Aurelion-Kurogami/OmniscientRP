@@ -1,13 +1,13 @@
 class CanonEngine {
 
-    find(name) {
+    get(name) {
 
-        const result = SEARCH.search(name);
+        const results = SEARCH.search(name);
 
-        if (result.length === 0)
+        if (results.length === 0)
             return null;
 
-        return result[0];
+        return RETRIEVER.retrieve(results[0]);
 
     }
 
