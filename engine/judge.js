@@ -1,21 +1,13 @@
-class JudgeEngine {
+export function judge(reply) {
 
-    constructor() {
-        this.errors = [];
-    }
+    return {
 
-    check(reply) {
+        valid: true,
 
-        this.errors = [];
+        warnings: [],
 
-        return true;
+        reply
 
-    }
-
-    getErrors() {
-        return this.errors;
-    }
+    };
 
 }
-
-const JUDGE = new JudgeEngine();
