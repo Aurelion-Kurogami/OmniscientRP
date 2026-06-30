@@ -1,19 +1,22 @@
 class CharacterEngine {
 
-    constructor() {
-        this.loadedCharacters = [];
-    }
+    get(id) {
 
-    load(character) {
-        this.loadedCharacters.push(character);
-    }
+        const characters = DB.get("characters");
 
-    clear() {
-        this.loadedCharacters = [];
-    }
+        const data = characters.find(c => c.id === id);
 
-    all() {
-        return this.loadedCharacters;
+        if (!data)
+            return null;
+
+        return ENTITY.create({
+
+            ...data,
+
+            type: "character"
+
+        });
+
     }
 
 }
