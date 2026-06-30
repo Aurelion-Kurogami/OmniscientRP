@@ -1,6 +1,8 @@
 import { Loader } from "./loader.js";
 import { Memory } from "./memory.js";
 import { Context } from "./context.js";
+import { Director } from "./director.js";
+import { Behavior } from "./behavior.js";
 import { buildPrompt } from "./prompt.js";
 import { judge } from "./judge.js";
 import { buildSave } from "./save.js";
@@ -16,6 +18,10 @@ export class AIEngine {
         this.memory = new Memory();
 
         this.context = new Context();
+
+        this.director = new Director();
+
+        this.behavior = new Behavior();
 
         this.pack = null;
 
@@ -39,6 +45,17 @@ export class AIEngine {
         const raw = await this.provider.generate(prompt);
 
         const checked = judge(raw);
+
+        this.director.update(
+            this.context,
+            this.memory
+        );
+
+        const npcState = this.behavior.update(
+            this.context
+        );
+
+        console.log(npcState);
 
         const save = buildSave(
             this.memory,
