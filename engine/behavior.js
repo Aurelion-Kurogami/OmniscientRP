@@ -1,17 +1,23 @@
-class BehaviorEngine {
+export class Behavior {
 
-    decide(context) {
+    update(context) {
 
-        const actions = [];
+        const world = context.get("world") || {};
 
-        // Placeholder:
-        // Later this will read behavior_rules.json
-        // and decide what characters do automatically.
+        const participants = context.get("participants") || [];
 
-        return actions;
+        return participants.map(character => ({
+
+            id: character,
+
+            state: "active",
+
+            action: "observe",
+
+            worldTurn: world.turn || 0
+
+        }));
 
     }
 
 }
-
-const BEHAVIOR = new BehaviorEngine();
