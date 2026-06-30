@@ -1,32 +1,25 @@
-class PromptBuilder {
+build(data) {
 
-    build({
-        systemPrompt,
-        canon,
-        memory,
-        world,
-        userMessage
-    }) {
+    return `
 
-        return `
 SYSTEM
-${systemPrompt}
+${data.systemPrompt}
 
 CANON
-${JSON.stringify(canon, null, 2)}
+${JSON.stringify(data.canon, null, 2)}
 
 MEMORY
-${JSON.stringify(memory, null, 2)}
+${JSON.stringify(data.memory, null, 2)}
 
 WORLD
-${JSON.stringify(world, null, 2)}
+${JSON.stringify(data.world, null, 2)}
+
+DIRECTOR
+${JSON.stringify(data.direction, null, 2)}
 
 USER
-${userMessage}
+${data.userMessage}
+
 `;
 
-    }
-
 }
-
-const PROMPT = new PromptBuilder();
