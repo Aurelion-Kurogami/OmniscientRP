@@ -1,4 +1,4 @@
-class RelationshipEngine {
+export class RelationshipEngine {
 
     constructor() {
 
@@ -12,28 +12,38 @@ class RelationshipEngine {
 
         return this.relationships.get(key) || {
 
-            trust: 50,
+            affinity: 0,
 
-            respect: 50,
+            trust: 0,
 
-            affection: 50,
-
-            fear: 0,
-
-            rivalry: 0
+            hostility: 0
 
         };
 
     }
 
-    set(a, b, data) {
+    set(a, b, value) {
 
         const key = `${a}:${b}`;
 
-        this.relationships.set(key, data);
+        this.relationships.set(key, value);
+
+    }
+
+    change(a, b, changes) {
+
+        const current = this.get(a, b);
+
+        this.set(a, b, {
+
+            affinity: current.affinity + (changes.affinity || 0),
+
+            trust: current.trust + (changes.trust || 0),
+
+            hostility: current.hostility + (changes.hostility || 0)
+
+        });
 
     }
 
 }
-
-const RELATIONSHIP = new RelationshipEngine();
