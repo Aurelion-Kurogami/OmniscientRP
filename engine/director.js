@@ -1,29 +1,21 @@
-class DirectorEngine {
+export class Director {
 
-    constructor() {
-        this.scene = {};
-    }
+    update(context, memory) {
 
-    update(context) {
+        const latest = memory.latest();
 
-        const result = {
+        if (!latest) return;
 
-            characters: [],
+        context.set("last_message", latest.content);
 
-            events: [],
+        const world = context.get("world") || {};
 
-            weather: null,
+        world.turn = (world.turn || 0) + 1;
 
-            scenario: null,
+        world.last_actor = latest.role;
 
-            recommendations: []
-
-        };
-
-        return result;
+        context.set("world", world);
 
     }
 
 }
-
-const DIRECTOR = new DirectorEngine();
