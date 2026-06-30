@@ -1,22 +1,32 @@
-export class Behavior {
+export class BehaviorEngine {
 
-    update(context) {
+    constructor() {
 
-        const world = context.get("world") || {};
+        this.rules = [];
 
-        const participants = context.get("participants") || [];
+    }
 
-        return participants.map(character => ({
+    register(rule) {
 
-            id: character,
+        this.rules.push(rule);
 
-            state: "active",
+    }
 
-            action: "observe",
+    decide(context) {
 
-            worldTurn: world.turn || 0
+        for (const rule of this.rules) {
 
-        }));
+            const result = rule(context);
+
+            if (result) {
+
+                return result;
+
+            }
+
+        }
+
+        return null;
 
     }
 
