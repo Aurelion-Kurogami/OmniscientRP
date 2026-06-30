@@ -1,35 +1,30 @@
-class AIEngine {
+import { Loader } from "./loader.js";
+import { buildPrompt } from "./prompt.js";
 
-    constructor() {
+export class AIEngine {
 
-        this.provider = "claude";
+  constructor(provider) {
+    this.provider = provider;
+    this.loader = new Loader();
+    this.pack = null;
+  }
 
-    }
+  async initialize(packName) {
+    this.pack = await this.loader.initialize(packName);
+  }
 
-    setProvider(provider) {
+  async reply(messages, settings = {}) {
 
-        this.provider = provider;
+    if (!this.pack)
+      throw new Error("Pack not loaded.");
 
-    }
+    const prompt = buildPrompt(
+      this.pack,
+      messages,
+      settings
+    );
 
-    async reply(context) {
-
-        const prompt = PROMPT.build({
-
-            systemPrompt: "",
-
-            ...context
-
-        });
-
-        console.log(prompt);
-
-        // Claude / GPT / Gemini request goes here
-
-        return "";
-
-    }
+    return await this.provider.generate(prompt);
+  }
 
 }
-
-const AI = new AIEngine();
