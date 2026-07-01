@@ -1,18 +1,47 @@
-class SkillTriggerEngine {
+class SkillTrigger {
 
-    check(character, world) {
+    trigger(character, context) {
 
-        const activated = [];
+        const skills = character?.abilities || [];
 
-        // Later:
-        // Read exclusive_skills.json
-        // Check trigger conditions
-        // Return activated skills
+        for (const skill of skills) {
 
-        return activated;
+            if (this.canActivate(skill, context)) {
+
+                return {
+
+                    action: "use_skill",
+
+                    skill,
+
+                    character: character.id
+
+                };
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    canActivate(skill, context) {
+
+        if (!skill.conditions) {
+
+            return true;
+
+        }
+
+        return skill.conditions.every(condition =>
+
+            context[condition.key] === condition.value
+
+        );
 
     }
 
 }
 
-const SKILLS = new SkillTriggerEngine();
+const SKILL_TRIGGER = new SkillTrigger();
