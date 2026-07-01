@@ -1,12 +1,48 @@
-export function search(pack, keyword) {
-  if (!pack || !pack.searchIndex) return [];
+export class Search {
 
-  keyword = keyword.toLowerCase();
+    constructor(database) {
 
-  return pack.searchIndex.filter(entry =>
-    entry.name.toLowerCase().includes(keyword) ||
-    (entry.aliases || []).some(alias =>
-      alias.toLowerCase().includes(keyword)
-    )
-  );
+        this.database = database;
+
+    }
+
+    byId(type, id) {
+
+        return this.database.find(type, id);
+
+    }
+
+    byName(type, name) {
+
+        return this.database
+            .get(type)
+            .find(entry =>
+                entry.name?.toLowerCase() ===
+                name.toLowerCase()
+            ) || null;
+
+    }
+
+    byAlias(type, alias) {
+
+        return this.database
+            .get(type)
+            .find(entry =>
+                (entry.aliases || []).some(
+                    value =>
+                        value.toLowerCase() ===
+                        alias.toLowerCase()
+                )
+            ) || null;
+
+    }
+
+    filter(type, callback) {
+
+        return this.database
+            .get(type)
+            .filter(callback);
+
+    }
+
 }
