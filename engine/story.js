@@ -1,19 +1,55 @@
 class StoryEngine {
 
     constructor() {
-        this.currentScene = "";
+
+        this.activeStories = [];
+
     }
 
-    setScene(scene) {
-        this.currentScene = scene;
+    equip(story) {
+
+        if (!this.activeStories.find(
+
+            value => value.id === story.id
+
+        )) {
+
+            this.activeStories.push(story);
+
+        }
+
     }
 
-    getScene() {
-        return this.currentScene;
+    unequip(id) {
+
+        this.activeStories = this.activeStories.filter(
+
+            story => story.id !== id
+
+        );
+
+    }
+
+    active() {
+
+        return [...this.activeStories];
+
+    }
+
+    has(id) {
+
+        return this.activeStories.some(
+
+            story => story.id === id
+
+        );
+
     }
 
     clear() {
-        this.currentScene = "";
+
+        this.activeStories = [];
+
     }
 
 }
