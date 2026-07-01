@@ -6,41 +6,43 @@ export class RelationshipEngine {
 
     }
 
-    get(a, b) {
+    key(a, b) {
 
-        const key = `${a}:${b}`;
-
-        return this.relationships.get(key) || {
-
-            affinity: 0,
-
-            trust: 0,
-
-            hostility: 0
-
-        };
+        return [a, b].sort().join(":");
 
     }
 
-    set(a, b, value) {
+    get(a, b) {
 
-        const key = `${a}:${b}`;
+        const key = this.key(a, b);
 
-        this.relationships.set(key, value);
+        if (!this.relationships.has(key)) {
+
+            this.relationships.set(key, {
+
+                affinity: 0,
+
+                trust: 0,
+
+                respect: 0,
+
+                hostility: 0
+
+            });
+
+        }
+
+        return this.relationships.get(key);
 
     }
 
     change(a, b, changes) {
 
-        const current = this.get(a, b);
+        const relationship = this.get(a, b);
 
-        this.set(a, b, {
+        Object.keys(changes).forEach(stat => {
 
-            affinity: current.affinity + (changes.affinity || 0),
-
-            trust: current.trust + (changes.trust || 0),
-
-            hostility: current.hostility + (changes.hostility || 0)
+            relationship[stat] += changes[stat];
 
         });
 
