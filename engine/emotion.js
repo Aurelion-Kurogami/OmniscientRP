@@ -8,23 +8,37 @@ export class EmotionEngine {
 
     get(id) {
 
-        return this.emotions.get(id) || {
+        if (!this.emotions.has(id)) {
 
-            mood: "neutral",
+            this.emotions.set(id, {
 
-            intensity: 0
+                mood: "neutral",
 
-        };
+                intensity: 0,
+
+                target: null,
+
+                reason: null
+
+            });
+
+        }
+
+        return this.emotions.get(id);
 
     }
 
-    set(id, mood, intensity = 1) {
+    set(id, mood, intensity = 1, target = null, reason = null) {
 
         this.emotions.set(id, {
 
             mood,
 
-            intensity
+            intensity,
+
+            target,
+
+            reason
 
         });
 
@@ -32,7 +46,7 @@ export class EmotionEngine {
 
     decay() {
 
-        for (const [id, emotion] of this.emotions) {
+        for (const emotion of this.emotions.values()) {
 
             emotion.intensity = Math.max(
 
@@ -45,6 +59,10 @@ export class EmotionEngine {
             if (emotion.intensity === 0) {
 
                 emotion.mood = "neutral";
+
+                emotion.target = null;
+
+                emotion.reason = null;
 
             }
 
