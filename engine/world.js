@@ -10,7 +10,9 @@ export class World {
 
             location: null,
 
-            weather: null,
+            weather: "Unknown",
+
+            probability: 100,
 
             participants: [],
 
@@ -20,12 +22,15 @@ export class World {
 
     }
 
-    update(data) {
+    get(key) {
 
-        Object.assign(
-            this.state,
-            data
-        );
+        return this.state[key];
+
+    }
+
+    set(key, value) {
+
+        this.state[key] = value;
 
     }
 
@@ -35,11 +40,9 @@ export class World {
 
     }
 
-    get() {
+    export() {
 
-        return structuredClone(
-            this.state
-        );
+        return structuredClone(this.state);
 
     }
 
