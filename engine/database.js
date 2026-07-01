@@ -6,7 +6,7 @@ export class Database {
 
     }
 
-    get(type) {
+    all(type) {
 
         return this.pack[type] || [];
 
@@ -14,15 +14,31 @@ export class Database {
 
     find(type, id) {
 
-        return this.get(type).find(
+        return this.all(type).find(
+
             entry => entry.id === id
+
+        ) || null;
+
+    }
+
+    findByName(type, name) {
+
+        return this.all(type).find(
+
+            entry =>
+
+                entry.name?.toLowerCase() ===
+
+                name.toLowerCase()
+
         ) || null;
 
     }
 
     filter(type, callback) {
 
-        return this.get(type).filter(callback);
+        return this.all(type).filter(callback);
 
     }
 
