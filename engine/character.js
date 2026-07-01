@@ -1,21 +1,46 @@
 class CharacterEngine {
 
-    get(id) {
+    constructor() {
 
-        const characters = DB.get("characters");
+        this.active = [];
 
-        const data = characters.find(c => c.id === id);
+    }
 
-        if (!data)
-            return null;
+    add(character) {
 
-        return ENTITY.create({
+        if (!this.active.includes(character)) {
 
-            ...data,
+            this.active.push(character);
 
-            type: "character"
+        }
 
-        });
+    }
+
+    remove(character) {
+
+        this.active = this.active.filter(
+
+            value => value !== character
+
+        );
+
+    }
+
+    has(character) {
+
+        return this.active.includes(character);
+
+    }
+
+    all() {
+
+        return [...this.active];
+
+    }
+
+    clear() {
+
+        this.active = [];
 
     }
 
