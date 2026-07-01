@@ -8,19 +8,31 @@ export class EventEngine {
 
     emit(type, payload = {}) {
 
-        this.events.push({
+        const event = {
+
+            id: crypto.randomUUID(),
 
             type,
 
             payload,
 
-            time: Date.now()
+            created: Date.now()
 
-        });
+        };
+
+        this.events.push(event);
+
+        return event;
 
     }
 
-    latest(type) {
+    latest(type = null) {
+
+        if (!type) {
+
+            return this.events.at(-1) || null;
+
+        }
 
         for (let i = this.events.length - 1; i >= 0; i--) {
 
@@ -36,7 +48,7 @@ export class EventEngine {
 
     }
 
-    history() {
+    all() {
 
         return [...this.events];
 
