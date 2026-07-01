@@ -1,33 +1,41 @@
-class Entity {
+class EntityEngine {
 
-    constructor(data = {}) {
+    constructor() {
 
-        this.id = data.id || "";
-
-        this.type = data.type || "";
-
-        this.name = data.name || "";
-
-        this.tags = data.tags || [];
-
-        this.data = data;
+        this.entities = new Map();
 
     }
 
-    hasTag(tag) {
+    register(id, entity) {
 
-        return this.tags.includes(tag);
+        this.entities.set(id, entity);
+
+    }
+
+    get(id) {
+
+        return this.entities.get(id) || null;
+
+    }
+
+    has(id) {
+
+        return this.entities.has(id);
+
+    }
+
+    remove(id) {
+
+        this.entities.delete(id);
+
+    }
+
+    clear() {
+
+        this.entities.clear();
 
     }
 
 }
 
-const ENTITY = {
-
-    create(data) {
-
-        return new Entity(data);
-
-    }
-
-};
+const ENTITY = new EntityEngine();
