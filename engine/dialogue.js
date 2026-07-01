@@ -1,41 +1,11 @@
-export class DialogueEngine {
+class DialogueEngine {
 
-    constructor() {
+    style(character, text) {
 
-        this.queue = [];
-
-    }
-
-    push(character, text) {
-
-        this.queue.push({
-
-            character,
-
-            text,
-
-            timestamp: Date.now()
-
-        });
-
-    }
-
-    next() {
-
-        return this.queue.shift() || null;
-
-    }
-
-    hasDialogue() {
-
-        return this.queue.length > 0;
-
-    }
-
-    clear() {
-
-        this.queue = [];
+        return text;
 
     }
 
 }
+
+const DIALOGUE = new DialogueEngine();
