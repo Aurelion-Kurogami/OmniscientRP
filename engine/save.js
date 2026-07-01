@@ -1,12 +1,16 @@
-export function buildSave(memory, context) {
+export function buildSave(memory, context, config = {}) {
 
     return {
 
+        version: 1,
+
         created: Date.now(),
+
+        config,
 
         context: context.export(),
 
-        messages: memory.history()
+        messages: memory.latest(100)
 
     };
 
