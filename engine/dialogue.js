@@ -1,11 +1,41 @@
-class DialogueEngine {
+export class DialogueEngine {
 
-    style(character, text) {
+    constructor() {
 
-        return text;
+        this.queue = [];
+
+    }
+
+    push(character, text) {
+
+        this.queue.push({
+
+            character,
+
+            text,
+
+            timestamp: Date.now()
+
+        });
+
+    }
+
+    next() {
+
+        return this.queue.shift() || null;
+
+    }
+
+    hasDialogue() {
+
+        return this.queue.length > 0;
+
+    }
+
+    clear() {
+
+        this.queue = [];
 
     }
 
 }
-
-const DIALOGUE = new DialogueEngine();
