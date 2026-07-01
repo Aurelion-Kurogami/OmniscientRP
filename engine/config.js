@@ -10,13 +10,15 @@ export class EngineConfig {
 
             autoSave: true,
 
-            autoBehavior: true,
-
             autoDirector: true,
 
-            autoSkillTrigger: true,
+            autoBehavior: true,
 
             autoJudge: true,
+
+            autoEvents: true,
+
+            autoEmotion: true,
 
             debug: false
 
@@ -33,6 +35,16 @@ export class EngineConfig {
     set(key, value) {
 
         this.settings[key] = value;
+
+    }
+
+    toggle(key) {
+
+        if (typeof this.settings[key] === "boolean") {
+
+            this.settings[key] = !this.settings[key];
+
+        }
 
     }
 
