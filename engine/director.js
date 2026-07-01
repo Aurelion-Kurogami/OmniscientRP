@@ -1,16 +1,8 @@
 export class Director {
 
-    update(context, memory, events) {
+    update(context, memory, events = null) {
 
-        const world = context.get("world") || {};
-
-        world.turn = (world.turn || 0) + 1;
-
-        world.lastUpdate = Date.now();
-
-        context.set("world", world);
-
-        const latest = memory.latest(1)[0];
+        const latest = memory.latest();
 
         if (!latest) {
 
@@ -18,21 +10,31 @@ export class Director {
 
         }
 
-        events.emit(
+        const world = context.get("world") || {};
 
-            "turn_started",
+        world.turn = (world.turn || 0) + 1;
 
-            {
+        world.last_actor = latest.role;
+
+        world.last_update = Date.now();
+
+        context.set("world", world);
+
+        context.set("last_message", latest.content);
+
+        if (events) {
+
+            events.emit("turn_started", {
 
                 turn: world.turn,
 
-                actor: latest.type,
+                actor: latest.role,
 
-                message: latest.content
+                content: latest.content
 
-            }
+            });
 
-        );
+        }
 
     }
 
@@ -42,6 +44,8 @@ export class Director {
 
         world.location = location;
 
+        world.scene_active = true;
+
         context.set("world", world);
 
     }
@@ -50,7 +54,7 @@ export class Director {
 
         const world = context.get("world") || {};
 
-        world.sceneFinished = true;
+        world.scene_active = false;
 
         context.set("world", world);
 
